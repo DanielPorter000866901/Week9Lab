@@ -29,6 +29,9 @@ public class UserServlet extends HttpServlet {
         
         String action = request.getParameter("action");
         
+        // initialize to false - not editing
+        request.setAttribute("edit", false);
+        
         // delete user
         if (action != null && action.equals("delete")) {
             String deleteEmail = request.getParameter("userEmail");
@@ -38,6 +41,16 @@ public class UserServlet extends HttpServlet {
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else if (action != null && action.equals("edit")){ // edit a user
+            
+            request.setAttribute("edit", true); // so the edit page shows up.
+            try {
+                User editUser = us.get(request.getParameter("userEmail")); // get user to edit
+                request.setAttribute("editUser", editUser);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
         
         try {

@@ -10,3 +10,8 @@
 td, th {
     padding: 4px;
 }
+
+#button, #button:visited {
+    text-decoration: none;
+    color: black;
+}
