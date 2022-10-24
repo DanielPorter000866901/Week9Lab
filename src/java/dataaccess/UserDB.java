@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import models.User;
+import models.Role;
 
 /**
  * 
@@ -33,7 +34,7 @@ public class UserDB {
                 String userPassword = rs.getString(4);
                 int userRole = rs.getInt(5);
                 
-                User user = new User(userEmail, userFn, userLn, userPassword, userRole);
+                User user = new User(userEmail, userFn, userLn, userPassword, new Role(userRole, ""));
                 users.add(user);
             }
         } finally {
@@ -68,7 +69,7 @@ public class UserDB {
                 String userPassword = rs.getString(4);
                 int userRole = rs.getInt(5);
                 
-                user = new User(userEmail, userFn, userLn, userPassword, userRole);
+                user = new User(userEmail, userFn, userLn, userPassword, new Role(userRole, ""));
             }
         } finally {
             DBUtil.closeResultSet(rs);
@@ -92,7 +93,7 @@ public class UserDB {
             ps.setString(2, user.getFirstName());
             ps.setString(3, user.getLastName());
             ps.setString(4, user.getPassword());
-            ps.setInt(5, user.getRole());
+            ps.setInt(5, user.getRole().getId());
             
             ps.executeUpdate();
         } finally {
@@ -113,7 +114,7 @@ public class UserDB {
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setString(3, user.getPassword());
-            ps.setInt(4, user.getRole());
+            ps.setInt(4, user.getRole().getId());
             
             ps.setString(5, user.getEmail());
             

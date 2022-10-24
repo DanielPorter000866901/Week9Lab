@@ -8,9 +8,10 @@
     </head>
     <body>
         <h1>Manage Users</h1>
+        <c:if test="${mess ne null}"><h2>Error</h2></c:if>
         <ul>
             <c:forEach items="${users}" var="user">
-                <li>${user.email}, ${user.firstName}, ${user.lastName}, ${user.password}, ${user.role}</li>
+                <li>${user.email}, ${user.firstName}, ${user.lastName}, ${user.password}, ${user.role.roleName}</li>
             </c:forEach>
         </ul>
         
