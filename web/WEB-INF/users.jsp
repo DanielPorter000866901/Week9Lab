@@ -27,7 +27,7 @@
                         <td>${user.lastName}</td>
                         <td>${user.role.roleName}</td>
                         <td>Edit</td>
-                        <td><a href="user?action=delete&amp;userEmail=${user.email}">Delete</a></td>
+                        <td><a href="user?action=delete&amp;userEmail=${user.email.replace("+", "%2B")}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>
