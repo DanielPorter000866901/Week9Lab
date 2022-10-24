@@ -149,19 +149,19 @@ public class UserDB {
     }
 
     /**
-     * delete a user
-     * @param user
+     * delete a user by email
+     * @param email
      * @throws Exception 
      */
-    public void delete(User user) throws Exception {
+    public void delete(String email) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "DELETE FROM userdb.user WHERE email=?";
+        String sql = "DELETE FROM userdb.user WHERE email=(?)";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, user.getEmail());
+            ps.setString(1, email);
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);

@@ -84,11 +84,11 @@ public class UserService {
     }
     
     /**
-     * delete a user
-     * @param user
+     * delete a user by email
+     * @param email
      * @throws Exception 
      */
-    public void delete(User user) throws Exception {
-        accessUsers.delete(user);
+    public void delete(String email) throws Exception {
+        accessUsers.delete(email);
     }
 }

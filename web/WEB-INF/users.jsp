@@ -10,26 +10,32 @@
     <body>
         <h1>Manage Users</h1>
         
-        <table id="table">
-            <tr>
-                <th>Email</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Role</th>
-                <th></th>
-                <th></th>
-            </tr>
-            <c:forEach items="${users}" var="user">
+        <c:if test="${users.size() gt 0}">
+            <table id="table">
                 <tr>
-                    <td>${user.email}</td>
-                    <td>${user.firstName}</td>
-                    <td>${user.lastName}</td>
-                    <td>${user.role.roleName}</td>
-                    <td>Edit</td>
-                    <td>Delete</td>
+                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Role</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach items="${users}" var="user">
+                    <tr>
+                        <td>${user.email}</td>
+                        <td>${user.firstName}</td>
+                        <td>${user.lastName}</td>
+                        <td>${user.role.roleName}</td>
+                        <td>Edit</td>
+                        <td><a href="user?action=delete&amp;userEmail=${user.email}">Delete</a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
+        
+        <c:if test="${users.size() eq 0}">
+            <p>No users found. Please add a user.</p>
+        </c:if>
         
         <h2>Add User</h2>
         <form action="user" method="post">

@@ -27,6 +27,19 @@ public class UserServlet extends HttpServlet {
         UserService us = new UserService();
         RoleService rs = new RoleService();
         
+        String action = request.getParameter("action");
+        
+        // delete user
+        if (action != null && action.equals("delete")) {
+            String deleteEmail = request.getParameter("userEmail");
+            
+            try {
+                us.delete(deleteEmail);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         try {
             users = us.getAll();
             roles = rs.getAll();
