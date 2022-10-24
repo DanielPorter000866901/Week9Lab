@@ -75,7 +75,6 @@ public class UserServlet extends HttpServlet {
         UserService us = new UserService();
         
         if (action != null && action.equals("add")) {
-            User newUser;
             
             String email = request.getParameter("email");
             String firstName = request.getParameter("fname");
@@ -85,6 +84,24 @@ public class UserServlet extends HttpServlet {
             
             try {
                 us.insert(new User(email, firstName, lastName, password, new Role(roleId, "")));
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        } else if (action != null && action.equals("update")) {
+            
+            User newUser;
+            
+            String email = request.getParameter("email");
+            String firstName = request.getParameter("fname");
+            String lastName = request.getParameter("lname");
+            String password = request.getParameter("password");
+            int roleId = Integer.parseInt(request.getParameter("role"));
+            
+            newUser = new User(email, firstName, lastName, password, new Role(roleId, ""));
+            
+            try {
+                us.update(newUser);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -59,6 +59,7 @@
             <h2>Edit User</h2>
             <form action="user" method="post">
                 Email: ${editUser.email}<br />
+                <input type="hidden" name="email" value="${editUser.email}">
                 First Name: <input type="text" name="fname" required value="${editUser.firstName}"><br />
                 Last Name: <input type="text" name="lname" required value="${editUser.lastName}"><br />
                 Password: <input type="password" name="password" required><br />
@@ -70,7 +71,7 @@
 
                 <input type="hidden" name="action" value="update">
                 <input type="submit" value="Update User">
-                <button><a href="user" id="button">Cancel</a></button>
+                <button><a href="user" id="button">Cancel</a></button> <!-- Has style so it doesn't look like a hyperlink -->
             </form>
         </c:if>
         
