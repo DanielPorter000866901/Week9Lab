@@ -53,12 +53,14 @@ public class UserDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        String sql = "SELECT * FROM userdb.user WHERE email=\"?\"";
+        String sql = "SELECT * FROM userdb.user WHERE email=?";
         
         try {
             ps = con.prepareStatement(sql);
+            
             ps.setString(1, email);
             rs = ps.executeQuery();
+            
             if (rs.next()) {
                 String userEmail = rs.getString(1);
                 String userFn = rs.getString(2);
@@ -76,20 +78,22 @@ public class UserDB {
         
         return user;
     }
-
-//    below methods need properly implemented
     
-    public void insert(Note note) throws Exception {
+    public void insert(User user) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "INSERT INTO note (title, contents, owner) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO userdb.user (email, first_name, last_name, password, role) VALUES (?, ?, ?, ?, ?)";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, note.getTitle());
-            ps.setString(2, note.getContents());
-            ps.setString(3, note.getOwner());
+            
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getFirstName());
+            ps.setString(3, user.getLastName());
+            ps.setString(4, user.getPassword());
+            ps.setInt(5, user.getRole());
+            
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -97,17 +101,22 @@ public class UserDB {
         }
     }
 
-    public void update(Note note) throws Exception {
+    public void update(User user) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE note SET title=?, contents=? WHERE note_id=?";
+        String sql = "UPDATE userdb.user SET first_name=?, last_name=?, password=?, role=? WHERE email=?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, note.getTitle());
-            ps.setString(2, note.getContents());
-            ps.setInt(3, note.getNoteId());
+            
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getPassword());
+            ps.setInt(4, user.getRole());
+            
+            ps.setString(5, user.getEmail());
+            
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -115,15 +124,15 @@ public class UserDB {
         }
     }
 
-    public void delete(Note note) throws Exception {
+    public void delete(User user) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "DELETE FROM note WHERE note_id=?";
+        String sql = "DELETE FROM userdb.user WHERE email=?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, note.getNoteId());
+            ps.setString(1, user.getEmail());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
