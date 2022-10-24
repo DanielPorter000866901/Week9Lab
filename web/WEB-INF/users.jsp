@@ -31,8 +31,20 @@
             </c:forEach>
         </table>
         
-        <form action="/user" method="post">
+        <h2>Add User</h2>
+        <form action="user" method="post">
+            Email: <input type="email" name="email"><br />
+            First Name: <input type="text" name="fname"><br />
+            Last Name: <input type="text" name="lname"><br />
+            Password: <input type="text" name="password"><br />
+            Role: <select name="role">
+                <c:forEach items="${roles}" var="role">
+                    <option value="${role}">${role.roleName}</option>
+                </c:forEach>
+            </select><br />
             
+            <input type="hidden" name="action" value="add">
+            <input type="submit" value="Add User">
         </form>
     </body>
 </html>
