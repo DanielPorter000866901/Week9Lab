@@ -59,6 +59,12 @@ public class UserService {
      * @throws Exception 
      */
     public void insert(User user) throws Exception {
+       
+        // match role id with the role from the role table and update.
+        int id = user.getRole().getId();
+        Role role = rs.get(id);
+        user.setRole(role);
+        
         accessUsers.insert(user);
     }
     
@@ -68,6 +74,12 @@ public class UserService {
      * @throws Exception 
      */
     public void update(User user) throws Exception {
+        
+        // match role id with the role from the role table and update.
+        int id = user.getRole().getId();
+        Role role = rs.get(id);
+        user.setRole(role);
+        
         accessUsers.update(user);
     }
     

@@ -33,13 +33,13 @@
         
         <h2>Add User</h2>
         <form action="user" method="post">
-            Email: <input type="email" name="email"><br />
-            First Name: <input type="text" name="fname"><br />
-            Last Name: <input type="text" name="lname"><br />
-            Password: <input type="text" name="password"><br />
+            Email: <input type="email" name="email" required><br />
+            First Name: <input type="text" name="fname" required><br />
+            Last Name: <input type="text" name="lname" required><br />
+            Password: <input type="text" name="password" required><br />
             Role: <select name="role">
                 <c:forEach items="${roles}" var="role">
-                    <option value="${role}">${role.roleName}</option>
+                    <option value="${role.id}">${role.roleName}</option>
                 </c:forEach>
             </select><br />
             

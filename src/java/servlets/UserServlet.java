@@ -45,6 +45,28 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String action = request.getParameter("action");
+        UserService us = new UserService();
+        
+        if (action != null && action.equals("add")) {
+            User newUser;
+            
+            String email = request.getParameter("email");
+            String firstName = request.getParameter("fname");
+            String lastName = request.getParameter("lname");
+            String password = request.getParameter("password");
+            int roleId = Integer.parseInt(request.getParameter("role"));
+            
+            try {
+                us.insert(new User(email, firstName, lastName, password, new Role(roleId, "")));
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        
+        response.sendRedirect(request.getContextPath() + "/user");
+        
     }
 
 }
