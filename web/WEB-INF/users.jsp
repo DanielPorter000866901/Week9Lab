@@ -10,14 +10,14 @@
     <body>
         <h1>Manage Users</h1>
         
-        <table>
+        <table id="table">
             <tr>
                 <th>Email</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Role</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th></th>
+                <th></th>
             </tr>
             <c:forEach items="${users}" var="user">
                 <tr>
@@ -25,10 +25,14 @@
                     <td>${user.firstName}</td>
                     <td>${user.lastName}</td>
                     <td>${user.role.roleName}</td>
-                    <td></td>
-                    <td></td>
+                    <td>Edit</td>
+                    <td>Delete</td>
                 </tr>
             </c:forEach>
         </table>
+        
+        <form action="/user" method="post">
+            
+        </form>
     </body>
 </html>
