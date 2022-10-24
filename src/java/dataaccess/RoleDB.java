@@ -8,8 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import models.Role;
 
+/**
+ * 
+ * @author Aaron Warsylewicz, Daniel Porter
+ */
 public class RoleDB {
     
+    /**
+     * Get All Roles
+     * @return roles as a list
+     * @throws Exception 
+     */
     public List<Role> getAll() throws Exception {
         List<Role> roles = new ArrayList<>();
         ConnectionPool cp = ConnectionPool.getInstance();
@@ -39,6 +48,12 @@ public class RoleDB {
         return roles;
     }
     
+    /**
+     * Get role based on id
+     * @param roleId
+     * @return Role
+     * @throws Exception 
+     */
     public Role get(int roleId) throws Exception {
         Role role = null;
         

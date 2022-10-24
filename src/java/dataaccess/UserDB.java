@@ -14,6 +14,11 @@ import models.Role;
  */
 public class UserDB {
 
+    /**
+     * get all users
+     * @return users as a list
+     * @throws Exception 
+     */
     public List<User> getAll() throws Exception {
         List<User> users = new ArrayList<>();
         ConnectionPool cp = ConnectionPool.getInstance();
@@ -34,6 +39,7 @@ public class UserDB {
                 String userPassword = rs.getString(4);
                 int userRole = rs.getInt(5);
                 
+                // the role at this time is only the role id given in the table
                 User user = new User(userEmail, userFn, userLn, userPassword, new Role(userRole, ""));
                 users.add(user);
             }
@@ -46,6 +52,12 @@ public class UserDB {
         return users;
     }
 
+    /**
+     * Get user by email
+     * @param email
+     * @return User
+     * @throws Exception 
+     */
     public User get(String email) throws Exception {
         User user = null;
         
@@ -69,6 +81,7 @@ public class UserDB {
                 String userPassword = rs.getString(4);
                 int userRole = rs.getInt(5);
                 
+                // the role at this time is only the role id given in the table
                 user = new User(userEmail, userFn, userLn, userPassword, new Role(userRole, ""));
             }
         } finally {
@@ -80,6 +93,11 @@ public class UserDB {
         return user;
     }
     
+    /**
+     * Make new user
+     * @param user
+     * @throws Exception 
+     */
     public void insert(User user) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
@@ -102,6 +120,11 @@ public class UserDB {
         }
     }
 
+    /**
+     * update an existing user
+     * @param user
+     * @throws Exception 
+     */
     public void update(User user) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
@@ -125,6 +148,11 @@ public class UserDB {
         }
     }
 
+    /**
+     * delete a user
+     * @param user
+     * @throws Exception 
+     */
     public void delete(User user) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();

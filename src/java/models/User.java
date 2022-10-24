@@ -3,6 +3,10 @@ package models;
 
 import java.io.Serializable;
 
+/**
+ * User Javabean. Store user from database
+ * @author Daniel Porter
+ */
 public class User implements Serializable {
     
     private String email;

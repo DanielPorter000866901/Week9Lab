@@ -3,7 +3,10 @@ package models;
 
 import java.io.Serializable;
 
-
+/**
+ * Role Javabean. Store role from database
+ * @author Daniel Porter
+ */
 public class Role implements Serializable {
     private int id;
     private String roleName;
