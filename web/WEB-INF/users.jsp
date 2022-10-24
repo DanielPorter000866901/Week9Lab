@@ -5,20 +5,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Manage Users</title>
+        <link href="${pageContext.request.contextPath}/css/style.css" type="text/css" rel="stylesheet">
     </head>
     <body>
         <h1>Manage Users</h1>
-        <c:if test="${mess ne null}"><h2>Error</h2></c:if>
-        <ul>
-            <c:forEach items="${users}" var="user">
-                <li>${user.email}, ${user.firstName}, ${user.lastName}, ${user.password}, ${user.role.roleName}</li>
-            </c:forEach>
-        </ul>
         
-        <ul>
-            <c:forEach items="${roles}" var="role">
-                <li>${role.id}: ${role.roleName}</li>
+        <table>
+            <tr>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Role</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <c:forEach items="${users}" var="user">
+                <tr>
+                    <td>${user.email}</td>
+                    <td>${user.firstName}</td>
+                    <td>${user.lastName}</td>
+                    <td>${user.role.roleName}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
             </c:forEach>
-        </ul>
+        </table>
     </body>
 </html>
