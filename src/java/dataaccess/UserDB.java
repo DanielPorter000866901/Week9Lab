@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import models.User;
 
+/**
+ * 
+ * @author Aaron Warsylewicz, Daniel Porter
+ */
 public class UserDB {
 
     public List<User> getAll(String owner) throws Exception {
