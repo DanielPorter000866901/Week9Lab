@@ -40,10 +40,10 @@
         <c:if test="${edit eq false}">
             <h2>Add User</h2>
             <form action="user" method="post">
-                Email: <input type="email" name="email" required><br />
-                First Name: <input type="text" name="fname" required><br />
-                Last Name: <input type="text" name="lname" required><br />
-                Password: <input type="password" name="password" required><br />
+                Email: <input type="email" name="email" ><br />
+                First Name: <input type="text" name="fname" ><br />
+                Last Name: <input type="text" name="lname" ><br />
+                Password: <input type="password" name="password" ><br />
                 Role: <select name="role">
                     <c:forEach items="${roles}" var="role">
                         <option value="${role.id}">${role.roleName}</option>
@@ -53,6 +53,7 @@
                 <input type="hidden" name="action" value="add">
                 <input type="submit" value="Add User">
             </form>
+            <p>${error}</p>
         </c:if>
             
         <c:if test="${edit eq true}">
@@ -60,9 +61,9 @@
             <form action="user" method="post">
                 Email: ${editUser.email}<br />
                 <input type="hidden" name="email" value="${editUser.email}">
-                First Name: <input type="text" name="fname" required value="${editUser.firstName}"><br />
-                Last Name: <input type="text" name="lname" required value="${editUser.lastName}"><br />
-                Password: <input type="password" name="password" required><br />
+                First Name: <input type="text" name="fname"  value="${editUser.firstName}"><br />
+                Last Name: <input type="text" name="lname"  value="${editUser.lastName}"><br />
+                Password: <input type="password" name="password" ><br />
                 Role: <select name="role">
                     <c:forEach items="${roles}" var="role">
                         <option value="${role.id}">${role.roleName}</option>
@@ -70,9 +71,11 @@
                 </select><br />
 
                 <input type="hidden" name="action" value="update">
+                <input type="hidden" name="userEmail" value="${editUser.email}">
                 <input type="submit" value="Update User">
                 <button><a href="user" id="button">Cancel</a></button> <!-- Has style so it doesn't look like a hyperlink -->
             </form>
+            <p>${error}</p>
         </c:if>
         
     </body>
