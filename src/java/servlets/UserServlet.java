@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import services.*;
 import models.*;
+import dataaccess.RoleDB;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -101,10 +102,17 @@ public class UserServlet extends HttpServlet {
             String password = request.getParameter("password").trim();
             int roleId = Integer.parseInt(request.getParameter("role"));
             
+            
             try {
-                User insertUser = new User(email, firstName, lastName, password, new Role(roleId, ""));
+                RoleDB accessRoles = new RoleDB();
+                Role role = accessRoles.get(roleId);
+                
+                User insertUser = new User(email, firstName, lastName, password);
+                insertUser.setRole(role);
+                
                 us.insert(insertUser);
                 request.removeAttribute("error");
+                
             } catch (InvalidFieldsException inv) {
                 request.setAttribute("error", "There was an invalid field. User was not added.");
             } catch (Exception ex) {
@@ -121,9 +129,18 @@ public class UserServlet extends HttpServlet {
             String password = request.getParameter("password").trim();
             int roleId = Integer.parseInt(request.getParameter("role"));
             
-            newUser = new User(email, firstName, lastName, password, new Role(roleId, ""));
+            
+            
+            
+            
             
             try {
+                RoleDB accessRoles = new RoleDB();
+                Role role = accessRoles.get(roleId);
+                
+                newUser = new User(email, firstName, lastName, password);
+                newUser.setRole(role);
+            
                 us.update(newUser);
                 request.removeAttribute("error");
             } catch (InvalidFieldsException inv) {

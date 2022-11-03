@@ -46,7 +46,7 @@
                 Password: <input type="password" name="password" ><br />
                 Role: <select name="role">
                     <c:forEach items="${roles}" var="role">
-                        <option value="${role.id}">${role.roleName}</option>
+                        <option value="${role}">${role.roleName}</option>
                     </c:forEach>
                 </select><br />
 
@@ -67,7 +67,7 @@
                 Role: <select name="role">
                     <!--<option value="${editUser.role.id}">${editUser.role.roleName}</option>-->
                     <c:forEach items="${roles}" var="role">
-                        <option value="${role.id}" ${role.id eq editUser.role.id ? 'selected' : ''} >${role.roleName}</option>
+                        <option value="${role}" ${role.id eq editUser.role.id ? 'selected' : ''} >${role.roleName}</option>
                     </c:forEach>
                 </select><br />
 
