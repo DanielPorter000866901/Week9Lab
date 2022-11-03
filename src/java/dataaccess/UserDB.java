@@ -8,7 +8,7 @@ import models.Role;
 
 /**
  * 
- * @author Aaron Warsylewicz, Daniel Porter
+ * @author Daniel Porter
  */
 public class UserDB {
 

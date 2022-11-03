@@ -14,7 +14,6 @@ import exceptions.InvalidFieldsException;
 public class UserService {
     
     private final UserDB accessUsers = new UserDB();
-    private final RoleService rs = new RoleService();
     
     /**
      * Get all users and match up roles
@@ -24,15 +23,6 @@ public class UserService {
     public List<User> getAll() throws Exception {
         
         List<User> users = accessUsers.getAll();
-        
-        // match role id with the role from the role table and update.
-        for (int i = 0; i < users.size(); i++) {
-            
-            int id = users.get(i).getRole().getId();
-            Role role = rs.get(id);
-            
-            users.get(i).setRole(role);
-        }
         
         return users;
     }
@@ -46,11 +36,6 @@ public class UserService {
         
         User user = accessUsers.get(email);
         
-        // match role id with the role from the role table and update.
-        int id = user.getRole().getId();
-        Role role = rs.get(id);
-        user.setRole(role);
-        
         return user;
     }
     
@@ -62,10 +47,6 @@ public class UserService {
      */
     public void insert(User user) throws Exception, InvalidFieldsException {
        
-        // match role id with the role from the role table and update.
-        int id = user.getRole().getId();
-        Role role = rs.get(id);
-        user.setRole(role);
         
         // check all attributes are valid
         if (user.getEmail() == null || user.getFirstName() == null || user.getLastName() == null || user.getPassword() == null ||
@@ -85,10 +66,6 @@ public class UserService {
      */
     public void update(User user) throws Exception, InvalidFieldsException {
         
-        // match role id with the role from the role table and update.
-        int id = user.getRole().getId();
-        Role role = rs.get(id);
-        user.setRole(role);
         
         // check all attributes are valid
         if (user.getEmail() == null || user.getFirstName() == null || user.getLastName() == null || user.getPassword() == null ||
