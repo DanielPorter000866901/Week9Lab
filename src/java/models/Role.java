@@ -6,7 +6,7 @@
 package models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
 
 /**
  *
@@ -42,7 +43,7 @@ public class Role implements Serializable {
     @Column(name = "role_name")
     private String roleName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.EAGER)
-    private Collection<User> userCollection;
+    private List<User> userCollection;
 
     public Role() {
     }
@@ -73,11 +74,11 @@ public class Role implements Serializable {
     }
 
     @XmlTransient
-    public Collection<User> getUserCollection() {
+    public List<User> getUserCollection() {
         return userCollection;
     }
 
-    public void setUserCollection(Collection<User> userCollection) {
+    public void setUserCollection(List<User> userCollection) {
         this.userCollection = userCollection;
     }
 

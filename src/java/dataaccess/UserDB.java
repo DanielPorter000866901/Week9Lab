@@ -1,11 +1,8 @@
 package dataaccess;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import models.User;
 import models.Role;
 
@@ -54,12 +51,24 @@ public class UserDB {
      * @throws Exception 
      */
     public void insert(User user) throws Exception {
-        
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
         
         try {
             
-        } finally {
+            Role role = user.getRole();
+            role.getUserCollection().add(user);
             
+            trans.begin();
+            em.persist(user);
+            em.merge(role);
+            trans.commit();
+            
+        } catch (Exception ex) {
+            trans.rollback();
+        } 
+        finally {
+            em.close();
         }
     }
 
@@ -69,12 +78,20 @@ public class UserDB {
      * @throws Exception 
      */
     public void update(User user) throws Exception {
-        
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
         
         try {
             
-        } finally {
+            trans.begin();
+            em.merge(user);
+            trans.commit();
             
+        } catch (Exception ex) {
+            trans.rollback();
+        } 
+        finally {
+            em.close();
         }
     }
 
@@ -84,12 +101,25 @@ public class UserDB {
      * @throws Exception 
      */
     public void delete(String email) throws Exception {
-        
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
         
         try {
             
-        } finally {
+            User user = em.find(User.class, email);
+            Role role = user.getRole();
+            role.getUserCollection().remove(user);
             
+            trans.begin();
+            em.remove(em.merge(user));
+            em.merge(role);
+            trans.commit();
+            
+        } catch (Exception ex) {
+            trans.rollback();
+        } 
+        finally {
+            em.close();
         }
     }
 
