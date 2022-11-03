@@ -72,7 +72,13 @@ public class UserService {
                 user.getEmail().equals("") || user.getFirstName().equals("") || user.getLastName().equals("") || user.getPassword().equals("")) {
             throw new InvalidFieldsException();
         } else {
-            accessUsers.update(user);
+            
+            User oldUser = accessUsers.get(user.getEmail());
+            oldUser.setFirstName(user.getFirstName());
+            oldUser.setLastName(user.getLastName());
+            oldUser.setPassword(user.getPassword());
+            oldUser.setRole(user.getRole());
+            accessUsers.update(oldUser);
         }
         
         

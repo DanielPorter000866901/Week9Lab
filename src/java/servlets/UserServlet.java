@@ -102,7 +102,8 @@ public class UserServlet extends HttpServlet {
             int roleId = Integer.parseInt(request.getParameter("role"));
             
             try {
-                us.insert(new User(email, firstName, lastName, password, new Role(roleId, "")));
+                User insertUser = new User(email, firstName, lastName, password, new Role(roleId, ""));
+                us.insert(insertUser);
                 request.removeAttribute("error");
             } catch (InvalidFieldsException inv) {
                 request.setAttribute("error", "There was an invalid field. User was not added.");
