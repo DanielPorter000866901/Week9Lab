@@ -84,6 +84,19 @@ public class UserDB {
         
         try {
             
+            // remove user from role list
+            User oldUser = get(user.getEmail());
+            Role oldRole = oldUser.getRole();
+            oldRole.getUserCollection().remove(oldUser);
+            
+            System.out.println("Old Role:" + oldRole.getUserCollection());
+            
+            // add user to its new role
+            Role role = user.getRole();
+            role.getUserCollection().add(user);
+            
+            System.out.println("Role:" + role.getUserCollection());
+            
             trans.begin();
             em.merge(user);
             trans.commit();
